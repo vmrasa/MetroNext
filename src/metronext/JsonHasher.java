@@ -129,8 +129,8 @@ public class JsonHasher {
 				map.put(temp.getString("Text"), temp.getString("Value"));		
 			}
 		} catch (JSONException e) {
-			System.out.println("Unable to retrieve stops JSON.");
-			e.printStackTrace();
+			System.out.println("Unable to create stops JSON.");
+			//e.printStackTrace();
 		}
 		return map;
 	}
@@ -153,7 +153,7 @@ public class JsonHasher {
 		String departTime = "";
 		JSONArray array;
 		
-		// Retrieve the departure time
+		// Retrieve the departure time.
 		try {
 			array = new JSONArray(getJsonString(url).toString());
 			
@@ -164,8 +164,8 @@ public class JsonHasher {
 			}
 			
 		} catch (JSONException e) {
-			System.out.println("Unable to retrieve stops JSON.");
-			e.printStackTrace();
+			System.out.println("Unable to retrieve the requested stop.");
+			//e.printStackTrace();
 		}
 		
 		return departTime;
