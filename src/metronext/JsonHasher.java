@@ -153,19 +153,19 @@ public class JsonHasher {
 		String departTime = "";
 		JSONArray array;
 		
-		// Retrieve the departure time.
+		// Retrieve the departure time
 		try {
 			array = new JSONArray(getJsonString(url).toString());
-			
-			if (array.getJSONObject(0).getBoolean("Actual") != false) {
+			if (array.length() == 0) {
+				departTime = "The stop is invalid or is not associated with the given route/direction.";
+			} else if (array.getJSONObject(0).getBoolean("Actual") != false) {
 				departTime = array.getJSONObject(0).get("DepartureText").toString();
 			} else {
 				departTime = "Departure time unavailable.";
 			}
 			
 		} catch (JSONException e) {
-			System.out.println("Unable to retrieve the requested stop.");
-			//e.printStackTrace();
+			System.out.println("Unable to create JSONArray for departure times.");
 		}
 		
 		return departTime;
