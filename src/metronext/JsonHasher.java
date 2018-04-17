@@ -25,15 +25,13 @@ import org.json.JSONObject;
  */
 public class JsonHasher {
 	
-	private static HashMap<String, Integer> routeHash; //route names & numbers
-	private static HashMap<String, String> stopsHash; //stop names & IDs
+	private static HashMap<String, Integer> routeHash; //route names & numbers for the entire day
 	
 	/**
 	 * Constructor - simply initializes the route hash.
 	 */
 	public JsonHasher (){
 		this.routeHash = setRouteHash();
-		this.stopsHash = null;
 	}
 	
 	/**
@@ -46,21 +44,6 @@ public class JsonHasher {
 		return routeHash.containsKey(route);
 	}
 	
-	/**
-	 * Returns true if the Hasher contains a key corresponding
-	 * to the given stop.
-	 * @param route
-	 * @param stop
-	 * @param direction
-	 * @return
-	 */
-	public boolean hasStop(String route, String stop, int direction) {
-		if (stopsHash == null) {
-			stopsHash = setStopsHash(routeHash.get(route), direction);
-		}
-		
-		return stopsHash.containsKey(stop);
-	}
 	/**
 	 * Handles the validation and creation of a URL. 
 	 * Returns a null if the url cannot be created.
@@ -162,9 +145,8 @@ public class JsonHasher {
 	public String getNextDeparture(String route, int direction, String stop) {
 		
 		int routeNum = routeHash.get(route);
-		if (stopsHash == null) {
-			stopsHash = setStopsHash(routeHash.get(route), direction);
-		}
+		
+		HashMap<String, String> stopsHash = setStopsHash(routeHash.get(route), direction);
 		String stopId = stopsHash.get(stop);
 		
 		URL url = createUrl("http://svc.metrotransit.org/NexTrip/" + routeNum +"/" + direction + "/" + stopId + "?format=json");

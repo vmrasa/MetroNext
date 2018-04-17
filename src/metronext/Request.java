@@ -61,17 +61,22 @@ public class Request {
 		return dNum;
 	}
 	
+	/**
+	 * Checks the request for errors by checking the input
+	 * for route and direction. Note that the stop will automatically
+	 * be incorrect given an invalid route or direction, since it
+	 * requires both to be hashed.
+	 * @return
+	 */
 	private static String getRequestErrors() {
 		String errors = "";
+		boolean isValidRoute = hasher.hasRoute(route);
 		
-		if (hasher.hasRoute(route) == false) {
+		if (isValidRoute == false) {
 			errors += "-Route specified is unavailable.\n";
 		} 
 		if (direction == 0) {
 			errors += "-Direction specified is invalid. \n";
-		}
-		if (hasher.hasStop(route, stop, direction) == false) {
-			errors += "-Stop specified is invalid.\n";
 		}
 
 		return errors;
