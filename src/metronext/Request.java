@@ -1,17 +1,5 @@
 package metronext;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 /**
 
  * 
@@ -31,10 +19,10 @@ public class Request {
 	private static JsonHasher hasher;
 
 	public Request(String route, String stop, String direction) {
-		this.route = route;
-		this.direction = convertDirection(direction);
-		this.stop = stop;
-		this.hasher = new JsonHasher();
+		Request.route = route;
+		Request.direction = convertDirection(direction);
+		Request.stop = stop;
+		Request.hasher = new JsonHasher();
 	}
 	
 	/**
@@ -81,7 +69,7 @@ public class Request {
 
 		return errors;
 	}
-	public static String getNextDeparture () {
+	public String getNextDeparture () {
 		Boolean hasNoErrors = getRequestErrors().isEmpty();
 		if (hasNoErrors == false) {
 			System.out.println("The request is invalid for the following reasons:");
