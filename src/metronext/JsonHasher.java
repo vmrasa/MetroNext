@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +26,7 @@ import org.json.JSONObject;
  */
 public class JsonHasher {
 	
-	private static HashMap<String, Integer> routeHash; //route names & numbers for the entire day
+	private static Hashtable<String, Integer> routeHash; //route names & numbers for the entire day
 	
 	/**
 	 * Constructor - simply initializes the route hash.
@@ -92,22 +93,22 @@ public class JsonHasher {
 	 * The hash will contain route names paired with the route number.
 	 * @return
 	 */
-	private static HashMap<String, Integer> setRouteHash() {
+	private static Hashtable<String, Integer> setRouteHash() {
 		URL url = createUrl("http://svc.metrotransit.org/NexTrip/Routes?format=json");
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		Hashtable<String, Integer> table = new Hashtable<String, Integer>();
 		
 		JSONArray array;
 		try {
 			array = new JSONArray(getJsonString(url).toString());
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject temp = array.getJSONObject(i);
-				map.put(temp.getString("Description"), temp.getInt("Route"));		
+				table.put(temp.getString("Description"), temp.getInt("Route"));		
 			}
 		} catch (JSONException e) {
 			System.out.println("Unable to retrieve route JSON.");
 			e.printStackTrace();
 		}
-		return map;
+		return table;
 	}
 	
 	/**
