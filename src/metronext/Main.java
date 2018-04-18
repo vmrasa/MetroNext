@@ -8,8 +8,10 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//JsonHasher j = new JsonHasher();
-		if (args.length < 3) {
+		if (args.length < 0) {
+			System.out.println("I don't know how you've managed to do this.");
+		}
+		else if (args.length > 0 && args.length < 3) {
 			System.out.println("Too few arguments.");
 		} 
 		else if (args.length > 3) {

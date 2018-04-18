@@ -31,7 +31,7 @@ public class JsonHasher {
 	 * Constructor - simply initializes the route hash.
 	 */
 	public JsonHasher (){
-		this.routeHash = setRouteHash();
+		JsonHasher.routeHash = setRouteHash();
 	}
 	
 	/**
@@ -156,6 +156,7 @@ public class JsonHasher {
 		// Retrieve the departure time
 		try {
 			array = new JSONArray(getJsonString(url).toString());
+			System.out.println(array.toString());
 			if (array.length() == 0) {
 				departTime = "The stop is invalid or is not associated with the given route/direction.";
 			} else if (array.getJSONObject(0).getBoolean("Actual") != false) {
