@@ -64,16 +64,17 @@ public class Request {
 			errors += "-Route specified is invalid or unavailable for today.\n";
 		} 
 		if (direction == 0) {
-			errors += "-Direction specified is invalid. \n";
+			errors += "-Direction specified is invalid.\n";
 		}
 
 		return errors;
 	}
 	public String getNextDeparture () {
 		Boolean hasNoErrors = getRequestErrors().isEmpty();
+		//System.out.println("Route: " + route + "; Stop: " + stop + "; Direction: " + direction);
 		if (hasNoErrors == false) {
-			System.out.println("The request is invalid for the following reasons:");
-			return getRequestErrors();
+			String errors = "The request is invalid for the following reasons:\n";
+			return errors += getRequestErrors();
 		}
 		
 		return hasher.getNextDeparture(route, direction, stop);

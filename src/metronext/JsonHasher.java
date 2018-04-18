@@ -42,6 +42,7 @@ public class JsonHasher {
 	 * @return
 	 */
 	public boolean hasRoute(String route) {
+		if (route == null) return false;
 		return routeHash.containsKey(route);
 	}
 	

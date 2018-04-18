@@ -61,7 +61,7 @@ public class JsonRouteTest {
 	
 	@Test
 	public void hasRouteTest() {
-		 assertEquals(expectedResult, jsonHasher.hasRoute(input));
+		assertEquals(expectedResult, jsonHasher.hasRoute(input));
 	}
 
 }

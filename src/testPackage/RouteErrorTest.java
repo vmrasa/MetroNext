@@ -8,6 +8,7 @@ import java.util.Collection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
 
 import metronext.Request;
 
@@ -19,7 +20,7 @@ import metronext.Request;
  *
  */
 @RunWith(Parameterized.class)
-public class RequestTest {
+public class RouteErrorTest {
 	
 	/**
 	 * The following routes are known 24/7 routes and their corresponding stops.
@@ -40,18 +41,27 @@ public class RequestTest {
 	
 	private static final String RQERR = "The request is invalid for the following reasons:";
 	private static final String RTERR = "-Route specified is invalid or unavailable for today.";
-	private static final String DIRERR = "-Direction specified is invalid.";
-	private static final String STOPERR = "The stop is invalid or is not associated with the given route/direction.";
-	private static final String NXTBUSMSG = "Next bus";
 		
-	private Request request;
-	private boolean expected;
+	//private Request request;
+	//private boolean expected;
 	
-	public RequestTest(Request input, boolean expectedResults) {
+	/**
+	public RouteErrorTest(Request input, boolean expectedResults) {
 		this.request = input;
 		this.expected = expectedResults;
-	}
+	} **/
+	
+    @Parameter(value = 0)
+    public String route;
 
+    @Parameter(value = 1)
+    public String stop;
+
+    @Parameter(value = 2)
+    public String direction;
+    
+    @Parameter(value = 3)
+    public boolean expectedResult;
 	/**
 	 * Request input combinations are:
 	 * - VVV - returns time
@@ -67,22 +77,24 @@ public class RequestTest {
 	@Parameterized.Parameters
 	public static Collection inputRequests() {
 		return Arrays.asList(new Object[][] {
-			{new Request(VALIDROUTES[0], VALIDSTOPS[0] , "North"), false},
-			{new Request(VALIDROUTES[1], VALIDSTOPS[1] , ""), false},
-			{new Request(VALIDROUTES[2], "\n" , "EAST"), false},
-			{new Request(VALIDROUTES[3], "I'm not even trying" , "/southeast"), false},
-			{new Request(null, VALIDSTOPS[1] , "south"), true},
-			{new Request(":::", VALIDSTOPS[1] , "North"), true},
-			{new Request("-1345", VALIDSTOPS[2] , "North"), true},
-			{new Request("w/o", "asdfoijafnlwaenl" , "North"), true}
+			{VALIDROUTES[0], VALIDSTOPS[0] , "North", false},
+			{VALIDROUTES[1], VALIDSTOPS[1] , "", false},
+			{VALIDROUTES[2], "\n" , "EAST", false},
+			{VALIDROUTES[3], "I'm not even trying" , "/southeast", false},
+			{null, VALIDSTOPS[1] , "south", true},
+			{":::", VALIDSTOPS[1] , "0", true},
+			{"-1345", VALIDSTOPS[2] , "North", true},
+			{"w/o", "asdfoijafnlwaenl" , "1", true}
 		});
 	}
 	
 	
 	@Test
 	public void containsRouteError() {
-		String errMsg = request.getNextDeparture();
-		assertEquals(expected, errMsg.contains(RQERR) && errMsg.contains(RTERR));
+		Request r = new Request(route, stop, direction);
+		String errMsg = r.getNextDeparture();
+		System.out.println(errMsg);
+		assertEquals(expectedResult, (errMsg.contains(RQERR) && errMsg.contains(RTERR)));
 	}
 	
 
