@@ -1,5 +1,5 @@
-# MetroNext
-An exercise in how to use [MetroTransit's API](http://svc.metrotransit.org/).
+# Overview
+This project is an exercise in how to use [MetroTransit's API](http://svc.metrotransit.org/).
 
 The goal here is to create a program that will take a BUS ROUTE, BUS STOP, and DIRECTION as its inputs, and
 returns how long until the next bus arrives. Because all the inputs are strings, separation by quotation marks are necessary
@@ -12,9 +12,12 @@ I've made it so it shouldn't matter if there's crazy letter casing.
 
 The goal is to have proper input be the following:
 ```
-$java metronext [BUS ROUTE] [BUS STOP] [DIRECTION]
+$ java -jar metronext.jar [BUS ROUTE] [BUS STOP] [DIRECTION]
 ```
-For example:
+For example (using arbitrary inputs):
 ```
-$java metronext “Express - Target - Hwy 252 and 73rd Av P&R - Mpls” “Target North Campus Building F” “south”
+$ java -jar metronext.jar “Express - Target - Hwy 252 and 73rd Av P&R - Mpls” “Target North Campus Building F” “south”
+$ Next bus in 10 minutes
 ```
+# Running
+Development and tests were done using Eclipse. To run the project locally, you may either clone or download the repository, and then import the project to Eclipse. From there, the project may also be exported as a .jar file and run from the command line.
