@@ -11,7 +11,7 @@ public class Main {
 		if (args.length < 0) {
 			System.out.println("I don't know how you've managed to do this.");
 		}
-		else if (args.length > 0 && args.length < 3) {
+		else if (args.length >= 0 && args.length < 3) {
 			System.out.println("Too few arguments.");
 		} 
 		else if (args.length > 3) {
