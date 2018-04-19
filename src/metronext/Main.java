@@ -19,7 +19,7 @@ public class Main {
 		} 
 		else {
 			Request r = new Request(args[0], args[1], args[2]);
-			System.out.println(r.getNextDeparture());
+			System.out.print(r.getNextDeparture());
 		}
 	}
 

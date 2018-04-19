@@ -64,7 +64,7 @@ public class Request {
 			errors += "-Route specified is invalid or unavailable for today.\n";
 		} 
 		if (direction == 0) {
-			errors += "-Direction specified is invalid.\n";
+			errors += "-Direction specified is invalid.";
 		}
 
 		return errors;

@@ -20,7 +20,7 @@ import metronext.Request;
  *
  */
 @RunWith(Parameterized.class)
-public class RouteErrorTest {
+public class DirectionErrorTest {
 	
 	/**
 	 * The following routes are known 24/7 routes and their corresponding stops.
@@ -40,10 +40,7 @@ public class RouteErrorTest {
 	};
 	
 	private static final String RQERR = "The request is invalid for the following reasons:";
-	private static final String RTERR = "-Route specified is invalid or unavailable for today.";
-		
-	//private Request request;
-	//private boolean expected;
+	private static final String DIRERR = "-Direction specified is invalid.";
 	
     @Parameter(value = 0)
     public String route;
@@ -64,7 +61,7 @@ public class RouteErrorTest {
 	 * - VII - Direction error
 	 * - IVV - Route error
 	 * - IVI - Route and direction error
-	 * - IIV - Route and direction error
+	 * - IIV - Route error
 	 * - III - Route and direction error
 	 * @return
 	 */
@@ -72,23 +69,22 @@ public class RouteErrorTest {
 	public static Collection inputRequests() {
 		return Arrays.asList(new Object[][] {
 			{VALIDROUTES[0], VALIDSTOPS[0] , "North", false},
-			{VALIDROUTES[1], VALIDSTOPS[1] , "", false},
+			{VALIDROUTES[1], VALIDSTOPS[1] , "", true},
 			{VALIDROUTES[2], "\n" , "EAST", false},
-			{VALIDROUTES[3], "I'm not even trying" , "/southeast", false},
-			{null, VALIDSTOPS[1] , "south", true},
+			{VALIDROUTES[3], "I'm not even trying" , "/southeast", true},
+			{null, VALIDSTOPS[1] , "south", false},
 			{":::", VALIDSTOPS[1] , "0", true},
-			{"-1345", VALIDSTOPS[2] , "North", true},
+			{"-1345", VALIDSTOPS[2] , "North", false},
 			{"w/o", "asdfoijafnlwaenl" , "1", true}
 		});
 	}
-	
 	
 	@Test
 	public void containsRouteError() {
 		Request r = new Request(route, stop, direction);
 		String errMsg = r.getNextDeparture();
 		System.out.println(errMsg);
-		assertEquals(expectedResult, (errMsg.contains(RQERR) && errMsg.contains(RTERR)));
+		assertEquals(expectedResult, (errMsg.contains(RQERR) && errMsg.contains(DIRERR)));
 	}
 	
 
