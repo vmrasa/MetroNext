@@ -20,4 +20,7 @@ $ java -jar metronext.jar â€œExpress - Target - Hwy 252 and 73rd Av P&R - Mplsâ€
 $ Next bus in 10 minutes
 ```
 # Running
-Development and tests were done using Eclipse. To run the project locally, you may either clone or download the repository, and then import the project to Eclipse. From there, the project may also be exported as a .jar file and run from the command line.
+Development and tests were done using Eclipse. If you also wish to develop and run using Eclipse, you can either of the following:
+1) Clone repository: go to Eclipse > File > Import > Git  > select "next", and follow the instructions from there.
+2) Download repository .zip: go to Eclipse > File > Import > Archive File > select "Browse", and navigate to where you downloaded the zip folder. 
+Once its running properly in Eclipse, the project may be exported as a .jar file to be run on the command line.
